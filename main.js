@@ -13,29 +13,25 @@ numeroPar(12)
 
 /* 18) Programa una función que dada una cadena de texto cuente el número de vocales y consonantes, pe. miFuncion("Hola Mundo") devuelva Vocales: 4, Consonantes: 5. */
 
-const vocalesConsonantes = (cadena = "") => {
-  if (cadena === "") return console.warn('Escriba una cadena de texto')
-  if (typeof cadena !== 'string') return console.warn ('Solo se aceptan datos tipo cadena')
+const vocalesConsonantes = (cadena = undefined) => {
 
-  cadena = cadena.toLowerCase()
-  
-  let consonantes = 0;
   let vocales = 0;
+  let consonantes = 0;
+  let espacios = 0;
 
-  for (const e of cadena){
-    if (new RegExp ("[a,e,i,o,u,á,é,í,ó,ú]").test(e)){
+  for (const letra of cadena){
+    if (new RegExp("[a,e,i,o,u,á,é,í,ó,ú]","ig").test(letra)){
       vocales++
-    } else if (new RegExp ("[b,c,d,f,g,h,j,k,l,m,n,ñ,p,q,r,s,t,v,w,x,y,z]")){
+    } else if (new RegExp ("[b,c,d,f,g,h,j,k,l,m,n,ñ,p,q,r,s,t,v,w,x,y,z]","ig").test(letra)){
       consonantes++
-    } else {
-      console.warn('Esto no debería aparecer')
-    }
-  } 
-  return console.log(`El texto tiene ${consonantes} consonantes y ${vocales} vocales`)
+    } 
+  }
+  console.log(`Caracteres = ${cadena.length}, Vocales = ${vocales}, Consonantes = ${consonantes}`)
+  let nuevaCadena = cadena.split("")
+  console.log(nuevaCadena)
 }
 
-vocalesConsonantes("como estamos comparito")
-
+vocalesConsonantes('Hola, como estas')
 
 /* 19) Programa una función que valide que un texto sea un nombre válido, pe. miFuncion("Jonathan MirCha") devolverá verdadero. */
 
@@ -43,7 +39,7 @@ const nombreValido = (cadena = "") => {
   if (cadena === "") return console.warn ('Escriba algo')
   if (typeof cadena !== 'string') return console.warn ('Escriba un dato tipo cadena')
 
-  let caracterInvalido = false;
+
 
   let expReg = /^[A-Za-zÑñÁáÉéíÍóÓúÚ\s]+$/g.test(cadena);
 
@@ -208,6 +204,137 @@ imparesPares([1,2,3,4,5,6,7,8,9,10])
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+class Pelicula {
+  constructor({id,titulo,director,anio,pais,genero,calificacion}){
+    this.id = id
+    this.titulo = titulo
+    this.director = director
+    this.anio = anio
+    this.pais = pais
+    this.genero = genero
+    this.calificacion = calificacion
+
+
+    // validaciones
+    this.validarCadena(id)
+    this.validarCaracteres(id)
+    this.validarTitulo(titulo)
+    this.validarDirector(director)
+    this.validarEstreno(anio)
+    this.validarArray(pais)
+    this.validarArray(genero)
+    this.validarGenero(genero)
+   
+  }
+
+  validarArray = (arr) => {
+    if (!arr) return console.warn ('El arreglo está vacío')
+    if (!(arr instanceof Array)) return console.warn('No ha introducido un arreglo')
+    if (arr.length === 0) return console.warn('El arreglo no tiene datos')
+
+    for (const dato of arr){
+      if (typeof dato !== 'string') console.warn(`${dato} no es un string`)
+    }
+
+  }
+
+  validarEstreno = (anio) => {
+    if (typeof anio !== 'number') return console.warn('El año debe ser un número')
+    if(!(Number.isInteger(anio))) return console.warn('El año debe ser un número entero')
+    if (anio.toString() < 4) return console.warn('El año debe tener mas de 4 dígitos')
+  }
+
+  validarCadena = (cadena) => {
+    if (!cadena) return console.warn('Esta vacío')
+    if (typeof cadena !== 'string') return console.warn('Sólo se aceptan carácteres tipo string')
+    return true;
+  }
+
+  validarCaracteres = (id) => {
+    this.validarCadena(id)
+    if ((/^([a-z]){2}([0-9]){7}$/.test(id))){
+      return true
+    } else {
+      return console.warn('Debe escribir una cadena con 2 letras y 7 números')
+    }
+  }
+
+  validarTitulo = (cadena) => {
+    this.validarCadena(cadena)
+    if (cadena.length > 100) return console.warn('Su título ha rebasado los 100 caracteres')
+    console.info('El titulo se ha validado')
+  }
+
+  validarDirector = (cadena) => {
+    this.validarCadena(cadena)
+    if (cadena.length > 50) return console.warn('El nombre del director ha rebasado los 50 caracteres')
+    console.info('El director es válido')
+  }
+
+  validarGenero = (genero) => {
+    if (genero != 'action') return console.warn(`${genero} es distinto de action o adult`)
+
+
+  }
+
+
+
+
+  
+}
+
+const peli = new Pelicula ({
+  id:'tt0000000',
+  titulo: 'asd',
+  director:'asdasasdasddasd',
+  anio:1345,
+  pais:['as1d'],
+  genero:['action']
+})
+
+/* Action, Adult, Adventure, Animation, Biography, Comedy, Crime, Documentary ,Drama, Family, Fantasy, Film Noir, Game-Show, History, Horror, Musical, Music, Mystery, News, Reality-TV, Romance, Sci-Fi, Short, Sport, Talk-Show, Thriller, War, Western. */
+/* 
+validarPais = (a, ...b) => {
+
+  if (typeof a !== 'string') return console.warn('El pais debe ser introducido como cadena1')
+
+  b.forEach(function(n){
+    if (typeof n !== 'string') return console.warn('El país debe ser introducido como cadena2')
+  })
+}
+
+validarPais('asd','asd','asd') */
+
+  /* 
+  validarCaracteres = (id = undefined) => {
+
+
+    if ((/^([a-z]){2}([0-9]){7}$/).test(id)){
+      return console.log(true)
+    } else {
+      return console.log(false)
+    }
+  }
+  validarCaracteres('as0000000') */
 
 /* 
 27) Programa una clase llamada Pelicula.
