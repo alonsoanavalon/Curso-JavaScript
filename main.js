@@ -233,6 +233,8 @@ class Pelicula {
     this.genero = genero
     this.calificacion = calificacion
 
+   
+
 
     // validaciones
     this.validarCadena(id)
@@ -243,7 +245,38 @@ class Pelicula {
     this.validarArray(pais)
     this.validarArray(genero)
     this.validarGenero(genero)
+  
    
+  }
+
+  static generosAceptados = () => {
+    let generos = ['Action', 'Adult', 'Adventure', 'Animation', 'Biography', 'Comedy', 'Crime', 'Documentary' ,'Drama', 'Family', 'Fantasy', 'Film Noir', 'Game-Show', 'History', 'Horror', 'Musical',' Music',' Mystery', 'News', 'Reality-TV', 'Romance', 'Sci-Fi', 'Short', 'Sport', 'Talk-Show', 'Thriller', 'War', 'Western']
+
+    console.table(generos)
+
+  }
+
+  validarGenero = (genero) => {
+    let generos = ['Action', 'Adult', 'Adventure', 'Animation', 'Biography', 'Comedy', 'Crime', 'Documentary' ,'Drama', 'Family', 'Fantasy', 'Film Noir', 'Game-Show', 'History', 'Horror', 'Musical',' Music',' Mystery', 'News', 'Reality-TV', 'Romance', 'Sci-Fi', 'Short', 'Sport', 'Talk-Show', 'Thriller', 'War', 'Western']
+
+    let esValido = false;
+
+    console.log("********************************")
+
+    for (const dato of generos){
+      genero.forEach(function(n){
+        if (n.toLowerCase() == dato.toLowerCase()){
+          esValido = true;
+        } /* else {
+          esValido = false;
+        } */})
+    }
+
+    console.info(esValido)
+
+    console.info('********************************')
+  
+
   }
 
   validarArray = (arr) => {
@@ -290,11 +323,11 @@ class Pelicula {
     console.info('El director es válido')
   }
 
-  validarGenero = (genero) => {
-    if (genero != 'action') return console.warn(`${genero} es distinto de action o adult`)
+ /*  validarGenero = (genero) => {
+    if (genero != 'action' || ) return console.warn(`${genero} es distinto de action o adult`)
 
 
-  }
+  } */
 
 
 
@@ -308,8 +341,11 @@ const peli = new Pelicula ({
   director:'asdasasdasddasd',
   anio:1345,
   pais:['as1d'],
-  genero:['action']
+  genero:['Action', 'Horr1r']
 })
+
+
+Pelicula.generosAceptados()
 
 /* Action, Adult, Adventure, Animation, Biography, Comedy, Crime, Documentary ,Drama, Family, Fantasy, Film Noir, Game-Show, History, Horror, Musical, Music, Mystery, News, Reality-TV, Romance, Sci-Fi, Short, Sport, Talk-Show, Thriller, War, Western. */
 /* 
